@@ -1,0 +1,81 @@
+/* Ugly as sin then worry about prettying it up*/
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: lightblue;
+}
+
+.gameboard {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "secretword graphic"
+    "buttons graphic"
+    "guesses graphic"
+    "keyboard graphic"
+}
+
+.secret-word-container {
+    grid-area: secretword;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.guesses{
+    grid-area: guesses;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.graphic {
+    grid-area: graphic;
+}
+
+.keyboard {
+    grid-area: keyboard;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.letterbox {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    font-size: 20px;
+}
+
+.difficulty-box {
+    grid-area: buttons;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.difficulty-buttons{
+    cursor: pointer;
+}
+
+.letter-buttons{
+    border-radius: 30%;
+    padding: 10px;
+    height: 40px;
+    width: 30px;
+    border: none;
+    cursor: pointer;
+    background-color: darkgray;
+
+}
