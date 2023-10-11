@@ -9,19 +9,30 @@ const hardButton = document.getElementById("hard");
 
 const secretWordContainer = document.querySelector(".secret-word-container");
 const guessesContainer = document.getElementById("guesses")
+guessesContainer.textContent = "CHOOSE YOUR DIFFICULTY"
 
+const easyWinCountElement = document.getElementById('easy-win-count span');
+const mediumWinCountElement = document.getElementById('medium-win-count span');
+const hardWinCountElement = document.getElementById('hard-win-count span');
 
 /* -- app state (variables) -- */
+
+
 let remainingGuesses = 7;
 let guessedLetters = [];
 let secretWord;
 let wordArray;
+
+let easyWinCount = 0;
+let mediumWinCount = 0;
+let hardWinCount = 0;
 
 // Function to initialize the game
 function initializeGame() {
   const randomIdx = Math.floor(Math.random() * wordArray.length);
   secretWord = wordArray[randomIdx].toUpperCase();
   console.log(secretWord)
+  guessesContainer.innerHTML = "";
   guessesContainer.textContent = `GUESSES LEFT: ${remainingGuesses}`;
   // Clear the secret word container
   secretWordContainer.innerHTML = "";
@@ -42,6 +53,7 @@ function handleLetterSelection(letter) {
     guessesContainer.textContent = `LETTER "${letter}" HAS ALREADY BEEN GUESSED`;
     return;
   }
+    // guessedLetters.className = "guessed-letters"
     guessedLetters.push(letter);
     // Check if the selected letter is in the secret word at any position
     let found = false;
@@ -89,26 +101,36 @@ function isWordGuessed() {
     const displayedWord = secretWordContainer.textContent;
     return !displayedWord.includes("_");
   }
+
+  // function for updating win counts
+  function updateWinCounts() {
+    easyWinCountElement.textContent = `Wins: ${easyWinCount}`;
+    mediumWinCountElement.textContent = `Wins: ${mediumWinCount}`;
+    hardWinCountElement.textContent = `Wins: ${hardWinCount}`;
+  }
 // Function to reset the game 
 function resetGame() {
   remainingGuesses = 7;
   guessedLetters = [];
-}
+};
 
 /* -- event listeners -- */
 
 easyButton.addEventListener("click", function () {
   wordArray = easyWords;
+  resetGame();
   initializeGame();
 });
 
 mediumButton.addEventListener("click", function () {
   wordArray = mediWords;
+  resetGame();
   initializeGame();
 });
 
 hardButton.addEventListener("click", function () {
   wordArray = hardWords;
+  resetGame();
   initializeGame();
 });
 
@@ -125,6 +147,7 @@ document.addEventListener("keydown", function (event) {
 let keyboardButtons = document.querySelectorAll('.letter-buttons');
 keyboardButtons.forEach((button) => {
     button.addEventListener("click", function(){
+      // button.className = "hidden";
         let letter = button.textContent;
         handleLetterSelection(letter);
     })
