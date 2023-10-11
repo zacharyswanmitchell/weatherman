@@ -11,9 +11,9 @@ const secretWordContainer = document.querySelector(".secret-word-container");
 const guessesContainer = document.getElementById("guesses")
 guessesContainer.textContent = "CHOOSE YOUR DIFFICULTY"
 
-const easyWinCountElement = document.getElementById('easy-win-count span');
-const mediumWinCountElement = document.getElementById('medium-win-count span');
-const hardWinCountElement = document.getElementById('hard-win-count span');
+const easyWinCountElement = document.getElementById("easy-win-count");
+const mediumWinCountElement = document.getElementById("medium-win-count");
+const hardWinCountElement = document.getElementById("hard-win-count");
 
 /* -- app state (variables) -- */
 
@@ -22,6 +22,8 @@ let remainingGuesses = 7;
 let guessedLetters = [];
 let secretWord;
 let wordArray;
+
+let currentDifficulty;
 
 let easyWinCount = 0;
 let mediumWinCount = 0;
@@ -48,22 +50,22 @@ function initializeGame() {
 // Function to handle letter selection
 function handleLetterSelection(letter) {
     letter = letter.toUpperCase();
-                // Check if the letter has already been guessed
+// Check if the letter has already been guessed
   if (guessedLetters.includes(letter)) {
     guessesContainer.textContent = `LETTER "${letter}" HAS ALREADY BEEN GUESSED`;
     return;
   }
-    // guessedLetters.className = "guessed-letters"
+// Insert guessed letters into array for reference 
     guessedLetters.push(letter);
-    // Check if the selected letter is in the secret word at any position
+// Check if the selected letter is in the secret word at any position
     let found = false;
     for (let i = 0; i < secretWord.length; i++) {
         if (secretWord[i] === letter) {
             found = true;
             updateDisplayWord(letter, i);
         }
-    }
-    // If the letter is not found in the word, subtract a guess
+    };
+// If the letter is not found in the word, subtract a guess
     if (!found) {
         remainingGuesses--;
         updateGuessesUI();
@@ -72,14 +74,16 @@ function handleLetterSelection(letter) {
             guessesContainer.textContent = "WHOMP! WHOMP! YOU LOSE!";
             resetGame();
         }
-    }
-
-    // Check if word has been fully revealed
+    };
+// Check if word has been fully revealed
     if (isWordGuessed()) {
+        handleWin(currentDifficulty);
         guessesContainer.textContent = "HUZZAH! YOU WIN!";
-        resetGame();
+
+        
     }
 }
+
 // Updating the Secret Word
 function updateDisplayWord(letter, i) {
     const secretWordLetters = secretWordContainer.querySelectorAll('.secret-word-hidden');
@@ -90,47 +94,70 @@ function updateDisplayWord(letter, i) {
     }
 }
 
-  
 // Function for updating the Guesses UI
 function updateGuessesUI() {
     guessesContainer.textContent = `GUESSES LEFT: ${remainingGuesses}`;
-  }
+}
 
 // Function to check if the word is guessed
 function isWordGuessed() {
     const displayedWord = secretWordContainer.textContent;
     return !displayedWord.includes("_");
-  }
+}
 
-  // function for updating win counts
-  function updateWinCounts() {
-    easyWinCountElement.textContent = `Wins: ${easyWinCount}`;
-    mediumWinCountElement.textContent = `Wins: ${mediumWinCount}`;
-    hardWinCountElement.textContent = `Wins: ${hardWinCount}`;
+// function for updating win counts
+function updateWinCounts() {
+    easyWinCountElement.textContent = `Easy: ${easyWinCount}`;
+    mediumWinCountElement.textContent = `Medium: ${mediumWinCount}`;
+    hardWinCountElement.textContent = `Hard: ${hardWinCount}`;
+}
+// Modify your win tracking logic for each difficulty level
+function handleWin(difficulty) {
+  if (isWordGuessed()) {
+    guessesContainer.textContent = "HUZZAH! YOU WIN!";
+// Update the win count for the appropriate difficulty
+    if (difficulty === 'easy') {
+      easyWinCount++;
+    } else if (difficulty === 'medium') {
+      mediumWinCount++;
+    } else if (difficulty === 'hard') {
+      hardWinCount++;
+    }
+// Update the win count display
+    updateWinCounts();
+
+    resetGame();
   }
+}
+
 // Function to reset the game 
 function resetGame() {
   remainingGuesses = 7;
   guessedLetters = [];
+  currentDifficulty = null;
 };
 
 /* -- event listeners -- */
 
+
 easyButton.addEventListener("click", function () {
-  wordArray = easyWords;
   resetGame();
+  currentDifficulty = "easy";
+  wordArray = easyWords;
   initializeGame();
 });
 
 mediumButton.addEventListener("click", function () {
-  wordArray = mediWords;
   resetGame();
+  currentDifficulty = "medium";
+  wordArray = mediWords;
   initializeGame();
 });
 
 hardButton.addEventListener("click", function () {
-  wordArray = hardWords;
   resetGame();
+  currentDifficulty = "hard";
+  wordArray = hardWords;
   initializeGame();
 });
 
