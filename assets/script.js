@@ -1,7 +1,7 @@
 /* -- constants -- */
-const easyWords = ['rain', 'snow', 'windy', 'cloud', 'foggy', 'hail', 'storm', 'sunny', 'cold', 'warm', 'mist', 'haze', 'heat', 'frost'];
-const mediWords = ['rainbow', 'tornado', 'sunrise', 'monsoon', 'cyclone', 'blizzard', 'drought', 'freezing', 'overcast', 'drizzle', 'showers', 'lightning', 'humidity', 'forecast', 'rainfall'];
-const hardWords = ['Stratocumulus', 'Cirrostratus', 'Altostratus', 'Nimbostratus', 'Cirrocumulus', 'Cumulonimbus', 'Cumulusnimbus', 'Stratocumulus', 'Altostratus', 'Stratocumulus', 'Cirrostratus', 'Altocumulus', 'Cumulonimbus', 'Cirrocumulus', 'Nimbostratus'];
+const easyWords = ['rain', 'snow', 'wind', 'cloud', 'foggy', 'hail', 'storm', 'sunny', 'cold', 'warm', 'hazy', 'heat', 'frost'];
+const mediWords = ['rainbow', 'tornado', 'sunrise', 'monsoon', 'cyclone', 'blizzard', 'drought', 'hurricane', 'overcast', 'drizzle', 'showers', 'lightning', 'rainfall'];
+const hardWords = ['Stratocumulus', 'Cirrostratus', 'Altostratus', 'Nimbostratus', 'Cirrocumulus', 'Cumulonimbus', 'Stratocumulus', 'Altostratus', 'Stratocumulus', 'Cirrostratus', 'Altocumulus', 'Cumulonimbus', 'Cirrocumulus', 'Nimbostratus'];
 
 const easyButton = document.getElementById("easy");
 const mediumButton = document.getElementById("medi");
