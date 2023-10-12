@@ -8,8 +8,8 @@ const mediumButton = document.getElementById("medi");
 const hardButton = document.getElementById("hard");
 
 const secretWordContainer = document.querySelector(".secret-word-container");
-const guessesContainer = document.getElementById("guesses")
-guessesContainer.textContent = "CHOOSE YOUR DIFFICULTY"
+const guessesContainer = document.getElementById("guesses");
+guessesContainer.textContent = "CHOOSE YOUR DIFFICULTY";
 
 const easyWinCountElement = document.getElementById("easy-win-count");
 const mediumWinCountElement = document.getElementById("medium-win-count");
@@ -29,13 +29,22 @@ let easyWinCount = 0;
 let mediumWinCount = 0;
 let hardWinCount = 0;
 
-initializeGame()
+let keyboardButtons = document.querySelectorAll('.letter-buttons');
+
+initializeGame();
 
 // Function to initialize the game
 function initializeGame() {
+  easyButton.classList.add('selected');
+  keyboardButtons.forEach(button => {
+    button.classList.remove('selected-letters');
+  });
+  
   const randomIdx = Math.floor(Math.random() * wordArray.length);
   secretWord = wordArray[randomIdx].toUpperCase();
+
   console.log(secretWord)
+
   guessesContainer.innerHTML = "";
   guessesContainer.textContent = `GUESSES LEFT: ${remainingGuesses}`;
   // Clear the secret word container
@@ -46,9 +55,9 @@ function initializeGame() {
     secretWordLetter.className = 'secret-word-hidden';
     secretWordLetter.textContent = "_";
     secretWordContainer.appendChild(secretWordLetter);
-  }
+  };
   
-}
+};
 // Function to handle letter selection
 function handleLetterSelection(letter) {
 // Check if the letter has already been guessed
@@ -177,14 +186,14 @@ document.addEventListener("keydown", function (event) {
     let letter = event.key.toUpperCase();
     console.log(letter);
     handleLetterSelection(letter);
-  }
+  };
 });
 
 // // Event listener for letter buttons
-let keyboardButtons = document.querySelectorAll('.letter-buttons');
+
 keyboardButtons.forEach((button) => {
     button.addEventListener("click", function(){
-      // button.className = "hidden";
+        button.classList.add('selected-letters');
         let letter = button.textContent.toUpperCase();
         handleLetterSelection(letter);
     })

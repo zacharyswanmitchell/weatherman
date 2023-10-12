@@ -116,11 +116,14 @@ body{
     color: #e6e60a;
     min-width: 40px;
 }
-.hidden{
-    background-color: black;
+
+.selected-letters{
     font-size: 25px;
     border-radius: 30%;
-    padding: 7px 12px;
-    border: none;
+    padding: 5px 5px;
+    border: 10px #e4e4e4;
+    cursor: pointer;
+    background-color: black;
     color: #e6e60a;
+    min-width: 40px;
 }
