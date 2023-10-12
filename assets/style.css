@@ -98,14 +98,23 @@ body{
     font-size: 30px;
 }
 
+.selected{
+    cursor: pointer;
+    background-color: rgb(19, 211, 19);
+    color: yellow;
+    border-radius: 3px;
+    font-size: 30px;
+}
+
 .letter-buttons{
     font-size: 25px;
     border-radius: 30%;
-    padding: 7px 12px;
+    padding: 5px 5px;
     border: 10px #e4e4e4;
     cursor: pointer;
     background-color: darkgray;
     color: #e6e60a;
+    min-width: 40px;
 }
 .hidden{
     background-color: black;

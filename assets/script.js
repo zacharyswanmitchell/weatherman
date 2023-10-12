@@ -146,6 +146,9 @@ easyButton.addEventListener("click", function () {
   currentDifficulty = "easy";
   wordArray = easyWords;
   initializeGame();
+  easyButton.classList.add('selected');
+  mediumButton.classList.remove('selected');
+  hardButton.classList.remove('selected');
 });
 
 mediumButton.addEventListener("click", function () {
@@ -153,6 +156,9 @@ mediumButton.addEventListener("click", function () {
   currentDifficulty = "medium";
   wordArray = mediWords;
   initializeGame();
+  easyButton.classList.remove('selected');
+  mediumButton.classList.add('selected');
+  hardButton.classList.remove('selected');
 });
 
 hardButton.addEventListener("click", function () {
@@ -160,6 +166,9 @@ hardButton.addEventListener("click", function () {
   currentDifficulty = "hard";
   wordArray = hardWords;
   initializeGame();
+  easyButton.classList.remove('selected');
+  mediumButton.classList.remove('selected');
+  hardButton.classList.add('selected');
 });
 
 // Event listener for key press
