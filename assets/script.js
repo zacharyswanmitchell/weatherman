@@ -21,13 +21,15 @@ const hardWinCountElement = document.getElementById("hard-win-count");
 let remainingGuesses = 7;
 let guessedLetters = [];
 let secretWord;
-let wordArray;
+let wordArray = easyWords;
 
-let currentDifficulty;
+let currentDifficulty = "easy";
 
 let easyWinCount = 0;
 let mediumWinCount = 0;
 let hardWinCount = 0;
+
+initializeGame()
 
 // Function to initialize the game
 function initializeGame() {
@@ -49,7 +51,6 @@ function initializeGame() {
 }
 // Function to handle letter selection
 function handleLetterSelection(letter) {
-    letter = letter.toUpperCase();
 // Check if the letter has already been guessed
   if (guessedLetters.includes(letter)) {
     guessesContainer.textContent = `LETTER "${letter}" HAS ALREADY BEEN GUESSED`;
@@ -101,7 +102,7 @@ function updateGuessesUI() {
 
 // Function to check if the word is guessed
 function isWordGuessed() {
-    const displayedWord = secretWordContainer.textContent;
+const displayedWord = secretWordContainer.textContent;
     return !displayedWord.includes("_");
 }
 
@@ -139,7 +140,7 @@ function resetGame() {
 
 /* -- event listeners -- */
 
-
+// Event Listeners for Difficulty Selection
 easyButton.addEventListener("click", function () {
   resetGame();
   currentDifficulty = "easy";
@@ -175,7 +176,7 @@ let keyboardButtons = document.querySelectorAll('.letter-buttons');
 keyboardButtons.forEach((button) => {
     button.addEventListener("click", function(){
       // button.className = "hidden";
-        let letter = button.textContent;
+        let letter = button.textContent.toUpperCase();
         handleLetterSelection(letter);
     })
 });
