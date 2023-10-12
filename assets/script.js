@@ -9,7 +9,6 @@ const hardButton = document.getElementById("hard");
 
 const secretWordContainer = document.querySelector(".secret-word-container");
 const guessesContainer = document.getElementById("guesses");
-guessesContainer.textContent = "CHOOSE YOUR DIFFICULTY";
 
 const easyWinCountElement = document.getElementById("easy-win-count");
 const mediumWinCountElement = document.getElementById("medium-win-count");
@@ -35,25 +34,23 @@ initializeGame();
 
 // Function to initialize the game
 function initializeGame() {
+  // Updating the win count from local storage
   easyWinCount = localStorage.getItem('easyWinCount') || 0;
   mediumWinCount = localStorage.getItem('mediumWinCount') || 0;
   hardWinCount = localStorage.getItem('hardWinCount') || 0;
-  
-
+  // Push the win count to the DOM
   easyWinCountElement.textContent = `Easy: ${easyWinCount}`;
   mediumWinCountElement.textContent = `Medium: ${mediumWinCount}`;
   hardWinCountElement.textContent = `Hard: ${hardWinCount}`;
-
+// Clear class from keyboard letters
   easyButton.classList.add('selected');
   keyboardButtons.forEach(button => {
     button.classList.remove('selected-letters');
   });
-
+// Create secret word
   const randomIdx = Math.floor(Math.random() * wordArray.length);
   secretWord = wordArray[randomIdx].toUpperCase();
-
-  console.log(secretWord)
-
+  // console.log(secretWord)
   guessesContainer.innerHTML = "";
   guessesContainer.textContent = `GUESSES LEFT: ${remainingGuesses}`;
   // Clear the secret word container
@@ -88,7 +85,7 @@ function handleLetterSelection(letter) {
     if (!found) {
         remainingGuesses--;
         updateGuessesUI();
-
+// Lose Scenario
         if (remainingGuesses === 0) {
             guessesContainer.textContent = "WHOMP! WHOMP! YOU LOSE!";
             resetGame();
@@ -98,10 +95,8 @@ function handleLetterSelection(letter) {
     if (isWordGuessed()) {
         handleWin(currentDifficulty);
         guessesContainer.textContent = "HUZZAH! YOU WIN!";
-
-        
-    }
-}
+    };
+};
 
 // Updating the Secret Word
 function updateDisplayWord(letter, i) {
@@ -109,20 +104,20 @@ function updateDisplayWord(letter, i) {
     for (let i = 0; i < secretWord.length; i++) {
       if (secretWord[i] === letter) {
         secretWordLetters[i].textContent = letter;
-      }
-    }
-}
+      };
+    };
+};
 
 // Function for updating the Guesses UI
 function updateGuessesUI() {
     guessesContainer.textContent = `GUESSES LEFT: ${remainingGuesses}`;
-}
+};
 
 // Function to check if the word is guessed
 function isWordGuessed() {
 const displayedWord = secretWordContainer.textContent;
     return !displayedWord.includes("_");
-}
+};
 
 // function for updating win counts
 function updateWinCounts() {
@@ -130,9 +125,9 @@ function updateWinCounts() {
     mediumWinCountElement.textContent = `Medium: ${mediumWinCount}`;
     hardWinCountElement.textContent = `Hard: ${hardWinCount}`;
 
-  localStorage.setItem('easyWinCount', easyWinCount);
-  localStorage.setItem('mediumWinCount', mediumWinCount);
-  localStorage.setItem('hardWinCount', hardWinCount);
+    localStorage.setItem('easyWinCount', easyWinCount);
+    localStorage.setItem('mediumWinCount', mediumWinCount);
+    localStorage.setItem('hardWinCount', hardWinCount);
 }
 // Modify your win tracking logic for each difficulty level
 function handleWin(difficulty) {
@@ -145,7 +140,7 @@ function handleWin(difficulty) {
       mediumWinCount++;
     } else if (difficulty === 'hard') {
       hardWinCount++;
-    }
+    };
 // Update the win count display
     updateWinCounts();
 
@@ -209,5 +204,5 @@ keyboardButtons.forEach((button) => {
         button.classList.add('selected-letters');
         let letter = button.textContent.toUpperCase();
         handleLetterSelection(letter);
-    })
+    });
 });
