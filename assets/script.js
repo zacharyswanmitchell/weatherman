@@ -35,11 +35,20 @@ initializeGame();
 
 // Function to initialize the game
 function initializeGame() {
+  easyWinCount = localStorage.getItem('easyWinCount') || 0;
+  mediumWinCount = localStorage.getItem('mediumWinCount') || 0;
+  hardWinCount = localStorage.getItem('hardWinCount') || 0;
+  
+
+  easyWinCountElement.textContent = `Easy: ${easyWinCount}`;
+  mediumWinCountElement.textContent = `Medium: ${mediumWinCount}`;
+  hardWinCountElement.textContent = `Hard: ${hardWinCount}`;
+
   easyButton.classList.add('selected');
   keyboardButtons.forEach(button => {
     button.classList.remove('selected-letters');
   });
-  
+
   const randomIdx = Math.floor(Math.random() * wordArray.length);
   secretWord = wordArray[randomIdx].toUpperCase();
 
@@ -120,6 +129,10 @@ function updateWinCounts() {
     easyWinCountElement.textContent = `Easy: ${easyWinCount}`;
     mediumWinCountElement.textContent = `Medium: ${mediumWinCount}`;
     hardWinCountElement.textContent = `Hard: ${hardWinCount}`;
+
+  localStorage.setItem('easyWinCount', easyWinCount);
+  localStorage.setItem('mediumWinCount', mediumWinCount);
+  localStorage.setItem('hardWinCount', hardWinCount);
 }
 // Modify your win tracking logic for each difficulty level
 function handleWin(difficulty) {
